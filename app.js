@@ -19,25 +19,27 @@ app.get('/',function(req,res){
     res.send("runnibg server node js");
 });
 
-app.get('/api/foods/',(req,res)=>{
-    connection.query('CALL getFoods()',(err,result)=>{
+app.get('/main',(req,res)=>{
+
+    connection.query('CALL AgentTopByCategory(?)',[0],(err,result)=>{
         if(err){
-            res.send(err);
-        } else {
-            res.send(result);
+            res.status(404).json(err)
+        }else {
+            res.json(result);
         }
     });
 });
 
-app.get('/api/food_id/',(req,res)=>{
-    let food_id = req.body.food_id;
+app.get('/food/',(req,res)=>{
 
-    connection.query('CALL getFoods(?)',[food_id],(err,result)=>{
-        if(err){
-            res.send(err);
-        } else {
-            res.send(result);
-        }
+    let id_food = req.body.id_food;
+
+    connection.query('CALL FoodsGetInfo(?);', [id_food] ,(error, results)=>{
+        if (error) res.json("{error:error}");
+        res.render('order-details',{
+            foodInfo :results[0][0],
+            foodinSameRestaurant :results[1],
+        })
     });
 });
 
