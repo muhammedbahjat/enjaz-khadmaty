@@ -23,23 +23,84 @@ app.get('/main',(req,res)=>{
 
     connection.query('CALL AgentTopByCategory(?)',[0],(err,result)=>{
         if(err){
-            res.status(404).json(err)
+            res.status(404).json(err);
         }else {
             res.json(result);
         }
     });
 });
 
-app.get('/food/',(req,res)=>{
+// get more agent (restruent and home)
+
+app.get('/api/MoreAgent',(req,res)=>{
+
+    let fromId = req.body.fromId;
+
+    connection.query('CALL AgentGetMore(?,?);',[fromId,parseInt(fromId) + 9],(err,result)=>{
+        if(err){
+            res.status(404).json(err);
+        }else {
+            res.json(result);
+        }
+    });
+});
+
+// get more resturent
+
+app.get('/api/MoreRestruent',(req,res)=>{
+
+    let fromId = req.body.fromId;
+
+    connection.query('CALL GetMoreResturant(?,?);',[fromId,parseInt(fromId) + 9],(err,result)=>{
+        if(err){
+            res.status(404).json(err);
+        }else {
+            res.json(result);
+        }
+    });
+});
+
+// get more house
+
+app.get('/api/MoreHouse',(req,res)=>{
+
+    let fromId = req.body.fromId;
+
+    connection.query('CALL GetMoreHouse(?,?);',[fromId,parseInt(fromId) + 9],(err,result)=>{
+        if(err){
+            res.status(404).json(err);
+        }else {
+            res.json(result);
+        }
+    });
+});
+
+// get agent foods
+
+app.get('/api/AgentFoods',(req,res)=>{
+
+    let agent_id = req.body.agent_id;
+
+    connection.query('CALL AgentGetFood(?);',[agent_id],(err,result)=>{
+        if(err){
+            res.status(404).json(err);
+        }else {
+            res.json(result);
+        }
+    });
+});
+
+app.get('/food',(req,res)=>{
 
     let id_food = req.body.id_food;
 
-    connection.query('CALL FoodsGetInfo(?);', [id_food] ,(error, results)=>{
-        if (error) res.json("{error:error}");
-        res.render('order-details',{
-            foodInfo :results[0][0],
-            foodinSameRestaurant :results[1],
-        })
+    connection.query('CALL FoodsGetInfo(?)', [id_food] ,(error, results)=>{
+        if(error){
+            res.status(404).json(error);
+        }else {
+            
+            res.json(results);
+        }
     });
 });
 
