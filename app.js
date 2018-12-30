@@ -19,7 +19,7 @@ app.get('/',function(req,res){
     res.send("runnibg server node js");
 });
 
-app.get('/main',(req,res)=>{
+app.get('/api/main',(req,res)=>{
 
     connection.query('CALL AgentTopByCategory(?)',[0],(err,result)=>{
         if(err){
@@ -32,11 +32,11 @@ app.get('/main',(req,res)=>{
 
 // api get more foods by max rate (restruent and home)
 
-app.get('/api/MoreFoods',(req,res)=>{
+app.post('/api/MoreFoods',(req,res)=>{
 
     let fromId = req.body.fromId;
 
-    connection.query('CALL FoodGetMore(?,?);',[fromId,parseInt(fromId) + 9],(err,result)=>{
+    connection.query('CALL Mob_FoodGetMore(?,?);',[fromId,parseInt(fromId) + 9],(err,result)=>{
         if(err){
             res.status(404).json(err);
         }else {
@@ -47,12 +47,12 @@ app.get('/api/MoreFoods',(req,res)=>{
 
 // api get more Agent by max rate and type
 
-app.get('/api/MoreAgent',(req,res)=>{
+app.post('/api/MoreAgent',(req,res)=>{
 
     let fromId       = req.body.fromId;
     let agent_type   = req.body.agent_type;
 
-    connection.query('CALL AgentGetMoreByType(?,?,?);',[fromId,parseInt(fromId) + 9,agent_type],(err,result)=>{
+    connection.query('CALL Mob_AgentGetMoreByType(?,?,?);',[fromId,parseInt(fromId) + 9,agent_type],(err,result)=>{
         if(err){
             res.status(404).json(err);
         }else {
@@ -63,29 +63,15 @@ app.get('/api/MoreAgent',(req,res)=>{
 
 // api get agent foods
 
-app.get('/api/AgentFoods',(req,res)=>{
+app.post('/api/AgentFoods',(req,res)=>{
 
     let agent_id = req.body.agent_id;
 
-    connection.query('CALL AgentGetFood(?);',[agent_id],(err,result)=>{
+    connection.query('CALL Mob_AgentGetFood(?);',[agent_id],(err,result)=>{
         if(err){
             res.status(404).json(err);
         }else {
             res.json(result);
-        }
-    });
-});
-
-app.get('/food',(req,res)=>{
-
-    let id_food = req.body.id_food;
-
-    connection.query('CALL FoodsGetInfo(?)', [id_food] ,(error, results)=>{
-        if(error){
-            res.status(404).json(error);
-        }else {
-            
-            res.json(results);
         }
     });
 });
