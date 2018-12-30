@@ -30,13 +30,29 @@ app.get('/main',(req,res)=>{
     });
 });
 
-// get more agent (restruent and home)
+// api get more foods by max rate (restruent and home)
+
+app.get('/api/MoreFood',(req,res)=>{
+
+    let fromId = req.body.fromId;
+
+    connection.query('CALL FoodGetMore(?,?);',[fromId,parseInt(fromId) + 9],(err,result)=>{
+        if(err){
+            res.status(404).json(err);
+        }else {
+            res.json(result);
+        }
+    });
+});
+
+// api get more Agent by max rate and type
 
 app.get('/api/MoreAgent',(req,res)=>{
 
-    let fromId = req.body.fromId;
+    let fromId       = req.body.fromId;
+    let agent_type   = req.body.agent_type;
 
-    connection.query('CALL AgentGetMore(?,?);',[fromId,parseInt(fromId) + 9],(err,result)=>{
+    connection.query('CALL AgentGetMoreByType(?,?,?);',[fromId,parseInt(fromId) + 9,agent_type],(err,result)=>{
         if(err){
             res.status(404).json(err);
         }else {
@@ -45,37 +61,7 @@ app.get('/api/MoreAgent',(req,res)=>{
     });
 });
 
-// get more resturent
-
-app.get('/api/MoreRestruent',(req,res)=>{
-
-    let fromId = req.body.fromId;
-
-    connection.query('CALL GetMoreResturant(?,?);',[fromId,parseInt(fromId) + 9],(err,result)=>{
-        if(err){
-            res.status(404).json(err);
-        }else {
-            res.json(result);
-        }
-    });
-});
-
-// get more house
-
-app.get('/api/MoreHouse',(req,res)=>{
-
-    let fromId = req.body.fromId;
-
-    connection.query('CALL GetMoreHouse(?,?);',[fromId,parseInt(fromId) + 9],(err,result)=>{
-        if(err){
-            res.status(404).json(err);
-        }else {
-            res.json(result);
-        }
-    });
-});
-
-// get agent foods
+// api get agent foods
 
 app.get('/api/AgentFoods',(req,res)=>{
 
