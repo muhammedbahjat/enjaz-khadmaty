@@ -36,7 +36,7 @@ app.post('/api/MoreFoods',(req,res)=>{
 
     let fromId = req.body.fromId;
 
-    connection.query('CALL Mob_FoodGetMore(?,?);',[fromId,parseInt(fromId) + 9],(err,result)=>{
+    connection.query('CALL Mob_FoodGetMore(?);',[fromId],(err,result)=>{
         if(err){
             res.status(404).json(err);
         }else {
@@ -52,7 +52,7 @@ app.post('/api/MoreAgent',(req,res)=>{
     let fromId       = req.body.fromId;
     let agent_type   = req.body.agent_type;
 
-    connection.query('CALL Mob_AgentGetMoreByType(?,?,?);',[fromId,parseInt(fromId) + 9,agent_type],(err,result)=>{
+    connection.query('CALL Mob_AgentGetMoreByType(?,?);',[fromId,agent_type],(err,result)=>{
         if(err){
             res.status(404).json(err);
         }else {
