@@ -76,6 +76,21 @@ app.post('/api/AgentFoods',(req,res)=>{
     });
 });
 
+// api get Info of specific food and all foods of this agent
+
+app.post('/api/FoodInfo',(req,res)=>{
+
+    let food_id = req.body.food_id;
+
+    connection.query('CALL FoodsGetInfo(?);',[food_id],(err,result)=>{
+        if(err){
+            res.status(404).json(err);
+        }else {
+            res.json(result);
+        }
+    });
+});
+
 
 
 var port = process.env.PORT || 3000;
