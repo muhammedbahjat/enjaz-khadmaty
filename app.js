@@ -32,7 +32,7 @@ app.get('/main',(req,res)=>{
 
 // api get more foods by max rate (restruent and home)
 
-app.get('/api/MoreFood',(req,res)=>{
+app.get('/api/MoreFoods',(req,res)=>{
 
     let fromId = req.body.fromId;
 
