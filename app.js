@@ -59,7 +59,8 @@ app.post('/api/MoreAgent',(req,res)=>{
         if(err){
             res.status(404).json(err);
         }else {
-            res.json(result);
+            var obj = {MoreAgent:result[0]};
+            res.json(obj);
         }
     });
 });
@@ -74,7 +75,8 @@ app.post('/api/AgentFoods',(req,res)=>{
         if(err){
             res.status(404).json(err);
         }else {
-            res.json(result);
+            var obj = {AgentFood:result[0]};
+            res.json(obj);
         }
     });
 });
@@ -89,7 +91,8 @@ app.post('/api/FoodInfo',(req,res)=>{
         if(err){
             res.status(404).json(err);
         }else {
-            res.json(result);
+            var obj = {FoodInfo:result[0]};
+            res.json(obj);
         }
     });
 });
