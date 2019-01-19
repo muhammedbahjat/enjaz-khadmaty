@@ -25,7 +25,9 @@ app.get('/api/main',(req,res)=>{
         if(err){
             res.status(404).json(err);
         }else {
-            res.json(result);
+            var obj = {bestFoods :result[0], bestRest:result[1],bestHouse:result[2]};
+           res.json(obj);
+
         }
     });
 });
@@ -40,7 +42,8 @@ app.post('/api/MoreFoods',(req,res)=>{
         if(err){
             res.status(404).json(err);
         }else {
-            res.json(result);
+            var obj = {MoreFoods :result[0]};
+            res.json(obj);
         }
     });
 });
