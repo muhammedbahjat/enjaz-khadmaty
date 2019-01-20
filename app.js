@@ -16,7 +16,7 @@ let connection = mysql.createConnection({
 });
 
 app.get('/',function(req,res){
-    res.send("runnibg server node js");
+    res.send("running server node js");
 });
 
 app.get('/api/main',(req,res)=>{
@@ -42,8 +42,7 @@ app.post('/api/MoreFoods',(req,res)=>{
         if(err){
             res.status(404).json(err);
         }else {
-            var obj = {MoreFoods :result[0]};
-            res.json(obj);
+            res.json(result[0]);
         }
     });
 });
@@ -59,8 +58,7 @@ app.post('/api/MoreAgent',(req,res)=>{
         if(err){
             res.status(404).json(err);
         }else {
-            var obj = {MoreAgent:result[0]};
-            res.json(obj);
+            res.json(result[0]);
         }
     });
 });
@@ -75,8 +73,7 @@ app.post('/api/AgentFoods',(req,res)=>{
         if(err){
             res.status(404).json(err);
         }else {
-            var obj = {AgentFood:result[0]};
-            res.json(obj);
+            res.json(result[0]);
         }
     });
 });
@@ -91,8 +88,7 @@ app.post('/api/FoodInfo',(req,res)=>{
         if(err){
             res.status(404).json(err);
         }else {
-            var obj = {FoodInfo:result[0]};
-            res.json(obj);
+            res.json(result[0]);
         }
     });
 });
