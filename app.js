@@ -42,7 +42,7 @@ app.post('/api/MoreFoods',(req,res)=>{
         if(err){
             res.status(404).json(err);
         }else {
-            res.json({"Morefoods":result[0]});
+            res.json({"morefoods":result[0]});
     }
     })  
 });
@@ -58,7 +58,7 @@ app.post('/api/MoreAgent',(req,res)=>{
         if(err){
             res.status(404).json(err);
         }else {
-            res.json(result[0]);
+            res.json({"moreAgent":result[0]});
         }
     });
 });
@@ -73,7 +73,7 @@ app.post('/api/AgentFoods',(req,res)=>{
         if(err){
             res.status(404).json(err);
         }else {
-            res.json(result[0]);
+            res.json({"agentFoods":result[0]});
         }
     });
 });
@@ -88,7 +88,7 @@ app.post('/api/FoodInfo',(req,res)=>{
         if(err){
             res.status(404).json(err);
         }else {
-            res.json(result[0]);
+            res.json({"foodInfo":result[0]});
         }
     });
 });
@@ -102,7 +102,7 @@ app.post('/api/Search',(req,res)=>{
         if(err){
             res.status(404).json(err);
         }else {
-            res.json(result[0]);
+            res.json({"search":result[0]});
         }
     });
 });
