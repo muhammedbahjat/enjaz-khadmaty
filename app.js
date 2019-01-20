@@ -42,9 +42,9 @@ app.post('/api/MoreFoods',(req,res)=>{
         if(err){
             res.status(404).json(err);
         }else {
-            res.json(result[0]);
-        }
-    });
+            res.json({"Morefoods":result[0]});
+    }
+    })  
 });
 
 // api get more Agent by max rate and type
