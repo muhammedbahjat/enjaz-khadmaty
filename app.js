@@ -93,6 +93,20 @@ app.post('/api/FoodInfo',(req,res)=>{
     });
 });
 
+// api get search result from food and agent
+app.post('/api/Search',(req,res)=>{
+
+    let search_term = req.body.search_term;
+
+    connection.query('CALL Mob_Search(?);',[search_term],(err,result)=>{
+        if(err){
+            res.status(404).json(err);
+        }else {
+            res.json(result[0]);
+        }
+    });
+});
+
 
 
 var port = process.env.PORT || 3000;
