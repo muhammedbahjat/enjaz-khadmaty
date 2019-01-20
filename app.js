@@ -42,7 +42,7 @@ app.post('/api/MoreFoods',(req,res)=>{
         if(err){
             res.status(404).json(err);
         }else {
-            res.json({"morefoods":result[0]});
+            res.json({"moreFoods":result[0]});
     }
     })  
 });
