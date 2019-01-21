@@ -25,7 +25,7 @@ app.get('/api/main',(req,res)=>{
         if(err){
             res.status(404).json(err);
         }else {
-            var obj = {moreFoods :result[0], bestRest:result[1],bestHouse:result[2]};
+            var obj = {moreFoods :result[0], moreRest:result[1],moreHouse:result[2]};
            res.json(obj);
 
         }
@@ -58,7 +58,11 @@ app.post('/api/MoreAgent',(req,res)=>{
         if(err){
             res.status(404).json(err);
         }else {
-            res.json({"moreAgent":result[0]});
+            if(agent_type == 0){
+                res.json({"moreRest":result[0]});
+            } else{
+                res.json({"moreHouse":result[0]});
+            }
         }
     });
 });
