@@ -25,7 +25,7 @@ app.get('/api/main',(req,res)=>{
         if(err){
             res.status(404).json(err);
         }else {
-            var obj = {bestFoods :result[0], bestRest:result[1],bestHouse:result[2]};
+            var obj = {moreFoods :result[0], bestRest:result[1],bestHouse:result[2]};
            res.json(obj);
 
         }
